@@ -1,0 +1,17 @@
+{
+  "name": "惊变100天",
+  "short_name": "惊变100天",
+  "description": "手机优先的生存互动网页游戏原型。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090c12",
+  "theme_color": "#090c12",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
