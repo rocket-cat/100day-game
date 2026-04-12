@@ -67,7 +67,9 @@ button {
 #play-shell {
   position: relative;
   z-index: 10;
+  height: 100%;
   min-height: 100%;
+  min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   opacity: 0;
@@ -476,8 +478,14 @@ button {
   position: relative;
   z-index: 3;
   display: grid;
+  min-height: 0;
   gap: 12px;
-  padding: 14px 12px calc(14px + var(--safe-bottom));
+  max-height: min(58dvh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px 12px calc(26px + var(--safe-bottom));
+  scroll-padding-bottom: calc(26px + var(--safe-bottom));
   border-top: 1px solid rgba(139, 170, 218, 0.12);
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
@@ -489,6 +497,10 @@ button {
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
+}
+
+#story-rail.has-choices {
+  max-height: min(66dvh, 620px);
 }
 
 #story-rail::before {
@@ -559,9 +571,9 @@ button {
 
 #story-rail.has-choices #dialog-text {
   min-height: 0;
-  max-height: min(24vh, 180px);
-  overflow: auto;
-  padding-right: 4px;
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
 }
 
 #dialog-text p {
@@ -596,27 +608,27 @@ button {
   flex-direction: column;
   gap: 10px;
   max-height: 0;
-  overflow: auto;
-  overscroll-behavior: contain;
-  padding-right: 4px;
+  overflow: hidden;
+  padding-right: 0;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 220ms ease, transform 220ms ease, max-height 220ms ease;
 }
 
 #choice-area.is-visible {
-  max-height: min(34vh, 280px);
+  max-height: 2000px;
+  overflow: visible;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-#choice-area::-webkit-scrollbar,
+#story-rail::-webkit-scrollbar,
 #dialog-text::-webkit-scrollbar {
   width: 4px;
 }
 
-#choice-area::-webkit-scrollbar-thumb,
+#story-rail::-webkit-scrollbar-thumb,
 #dialog-text::-webkit-scrollbar-thumb {
   border-radius: 999px;
   background: rgba(139, 170, 218, 0.28);
@@ -933,11 +945,10 @@ body.is-reduced-motion *::after {
 
   #story-rail {
     gap: 10px;
+    max-height: min(72dvh, 680px);
     padding-inline: 10px;
-  }
-
-  #choice-area.is-visible {
-    max-height: min(38vh, 292px);
+    padding-bottom: calc(30px + var(--safe-bottom));
+    scroll-padding-bottom: calc(30px + var(--safe-bottom));
   }
 
   .choice-button {
@@ -977,6 +988,6 @@ body.is-reduced-motion *::after {
   }
 
   #story-rail.has-choices #dialog-text {
-    max-height: min(22vh, 156px);
+    max-height: none;
   }
 }

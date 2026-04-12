@@ -37,6 +37,10 @@ def click_choice(page: Page, choice_id: str) -> None:
     page.wait_for_timeout(140)
 
 
+def capture_app(page: Page, path: Path) -> None:
+    page.locator("#app-frame").screenshot(path=str(path))
+
+
 def assert_contains(ids: list[str], choice_id: str, label: str) -> None:
     if choice_id not in ids:
         raise RuntimeError(f'{label}: missing expected choice "{choice_id}"')
@@ -103,7 +107,7 @@ def main() -> None:
         assert_contains(ids, "villa", "pick_shelter")
         assert_contains(ids, "bunker", "pick_shelter")
         assert_enabled_choices_hide_subtext(page, "pick_shelter")
-        page.screenshot(path=str(RUNTIME_DIR / "smoke-mobile-pick-shelter.png"), full_page=True)
+        capture_app(page, RUNTIME_DIR / "smoke-mobile-pick-shelter.png")
 
         click_choice(page, "villa")
         assert_toast_can_close(page)
@@ -127,7 +131,7 @@ def main() -> None:
 
         page.locator('[data-panel="system"]').click()
         page.locator(".overlay-panel").wait_for()
-        page.screenshot(path=str(RUNTIME_DIR / "smoke-mobile-system-panel.png"), full_page=True)
+        capture_app(page, RUNTIME_DIR / "smoke-mobile-system-panel.png")
         page.locator(".overlay-panel__close").click()
         page.locator(".overlay-panel").wait_for(state="hidden")
 
@@ -136,7 +140,7 @@ def main() -> None:
         assert_contains(ids, "explore_church", "explore_select")
         assert_contains(ids, "explore_shop", "explore_select")
         assert_choice_and_dialog_stacked(page)
-        page.screenshot(path=str(RUNTIME_DIR / "smoke-mobile-explore-day2.png"), full_page=True)
+        capture_app(page, RUNTIME_DIR / "smoke-mobile-explore-day2.png")
 
         click_choice(page, "explore_church")
         ids = advance_to_choices(page, "explore_church")
@@ -150,7 +154,7 @@ def main() -> None:
         ids = advance_to_choices(page, "explore_select_after_church")
         assert_not_contains(ids, "explore_church", "explore_select_after_church")
         assert_choice_and_dialog_stacked(page)
-        page.screenshot(path=str(RUNTIME_DIR / "smoke-mobile-explore-day4-after-church.png"), full_page=True)
+        capture_app(page, RUNTIME_DIR / "smoke-mobile-explore-day4-after-church.png")
 
         print("Mobile smoke passed:")
         print("- fresh start reaches the prologue choices without false death routing")

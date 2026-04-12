@@ -158,7 +158,15 @@ export const scenesEndgame = {
       hasCompanion(state, 'evelyn') ? copy.day80_hub.dialogues.withEvelyn : copy.day80_hub.dialogues.alone,
     ],
     choices: [
-      { id: 'save_john', text: copy.day80_hub.choices.save_john.text, subtext: copy.day80_hub.choices.save_john.subtext, next: (state) => (hasCompanion(state, 'evelyn') ? 'rescue_with_evelyn' : 'rescue_alone'), requires: ({ ammo }) => ammo >= 30, disabledText: copy.day80_hub.choices.save_john.disabledText, effects: { ammo: -30, toast: '你决定把 30 发弹药押给科研基地' } },
+      {
+        id: 'save_john',
+        text: copy.day80_hub.choices.save_john.text,
+        subtext: copy.day80_hub.choices.save_john.subtext,
+        next: (state) => (hasCompanion(state, 'evelyn') ? 'rescue_with_evelyn' : 'rescue_alone'),
+        requires: (state) => state.ammo >= (hasCompanion(state, 'evelyn') ? 40 : 30),
+        disabledText: copy.day80_hub.choices.save_john.disabledText,
+        effects: { ammo: -30, toast: '你决定先投入 30 发弹药冲进科研基地' },
+      },
       {
         id: 'skip_john',
         text: copy.day80_hub.choices.skip_john.text,
@@ -194,8 +202,11 @@ export const scenesEndgame = {
     nameplate: copy.rescue_with_evelyn.nameplate,
     dialogues: copy.rescue_with_evelyn.dialogues,
     deadlock: {
-      sceneId: 'death_end',
-      deathText: '你扑向两人之间，却连最后的火力都不够。尸群合拢时，你谁也没能带出去。',
+      sceneId: 'near_death',
+      recoveryScene: 'lone_wolf_setup',
+      crisisText: '你扑向两人之间，却发现最后那点火力根本不够。尸群合拢前，你只能翻窗撤离，身后只剩科研基地的警报和伊芙琳的喊声。',
+      deathText: '你没能从科研基地里逃出来。尸群合拢时，你把自己也埋在了那场营救里。',
+      effects: { removeCompanion: 'evelyn', toast: '你被迫独自撤离科研基地：失去伊芙琳' },
     },
     choices: (state) => {
       const choices = [

@@ -104,7 +104,7 @@ export const endgameCopy = {
       alone: '最近你刚找到一处足够养活上百人的大型超市。救，还是不救，这会直接影响最终结局走向。',
     },
     choices: {
-      save_john: { text: '救', subtext: '至少需要 30 发弹药，这是整轮最重的一次开销。', disabledText: '弹药不足 30' },
+      save_john: { text: '救', subtext: '独自前往至少需要 30 发弹药；若与伊芙琳同行，还得再预留 10 发收尾。', disabledText: '当前弹药不足这次营救所需' },
       skip_john: { text: '不救', subtext: '你会活得更稳，也会更像一头独狼。' },
     },
   },
