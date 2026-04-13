@@ -516,7 +516,7 @@ function render() {
         <div class="title-copy">
           <span class="title-copy__sub">SURVIVAL REBIRTH</span>
           <h1>惊变100天</h1>
-          <p>一轮完整可通关的末世生存互动剧本。守住据点、外出探索、维系人性，然后活到第 100 天。</p>
+          <p>前 80 天是生存阶段，80 天后进入终局分线，并在第 100 天落下正式结局。</p>
         </div>
         ${
           resumeAvailable
@@ -794,6 +794,11 @@ function renderPanel(scene) {
             ${prefs.reducedMotion ? '已减弱' : '标准'}
           </button>
         </div>
+      </article>
+      <article class="panel-card">
+        <span class="panel-card__eyebrow">当前目标</span>
+        <h3>阶段目标说明</h3>
+        <p>前 80 天先活下来并攒出关键分支；到第 80 天后进入终局线，故事结局会继续收束到第 100 天。</p>
       </article>
       <article class="panel-card">
         <span class="panel-card__eyebrow">当前版本</span>
